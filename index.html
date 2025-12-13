@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Niraj Khaniya | Portfolio</title>
+    <meta name="description" content="Personal Portfolio of Niraj Khaniya - Accountant, Trekker, Photographer" />
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Tailwind Config -->
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['Poppins', 'sans-serif'],
+            },
+            colors: {
+              primary: '#FF7A35',
+              dark: '#333333',
+              light: '#F9F9F9',
+            },
+            animation: {
+                'fade-in': 'fadeIn 0.5s ease-out',
+                'spin-slow': 'spin 3s linear infinite',
+            },
+            keyframes: {
+                fadeIn: {
+                    '0%': { opacity: '0', transform: 'translateY(10px)' },
+                    '100%': { opacity: '1', transform: 'translateY(0)' },
+                }
+            }
+          }
+        }
+      }
+    </script>
+
+    <!-- Custom CSS -->
+    <style>
+      html {
+        scroll-behavior: smooth;
+        scroll-padding-top: 80px; /* Account for fixed header */
+      }
+      body {
+        overflow-x: hidden;
+      }
+      
+      /* Typing Cursor */
+      .typing-cursor::after {
+        content: '|';
+        animation: blink 1s step-start infinite;
+      }
+      @keyframes blink {
+        50% { opacity: 0; }
+      }
+
+      /* Reveal Animation Classes */
+      .reveal-element {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 1s ease-out;
+      }
+      .reveal-visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    </style>
+<script type="importmap">
+{
+  "imports": {
+    "react": "https://esm.sh/react@^19.2.3",
+    "lucide-react": "https://esm.sh/lucide-react@^0.561.0",
+    "react/": "https://esm.sh/react@^19.2.3/"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+<body class="antialiased text-gray-800 bg-white">
+
+    <!-- Navbar -->
+    <nav id="navbar" class="fixed top-0 w-full z-50 transition-all duration-300 bg-transparent py-6">
+        <div class="container mx-auto px-4 md:px-6 flex justify-between items-center">
+            <a href="#home" class="text-2xl font-bold text-gray-800 tracking-wide">
+                Niraj<span class="text-primary">Khaniya</span>
+            </a>
+
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex space-x-8">
+                <a href="#home" class="text-gray-700 hover:text-primary font-medium transition-colors text-sm uppercase tracking-wider">Home</a>
+                <a href="#about" class="text-gray-700 hover:text-primary font-medium transition-colors text-sm uppercase tracking-wider">About</a>
+                <a href="#skills" class="text-gray-700 hover:text-primary font-medium transition-colors text-sm uppercase tracking-wider">Skills</a>
+                <a href="#travels" class="text-gray-700 hover:text-primary font-medium transition-colors text-sm uppercase tracking-wider">Travels</a>
+                <a href="#experience" class="text-gray-700 hover:text-primary font-medium transition-colors text-sm uppercase tracking-wider">Experience</a>
+                <a href="#contact" class="text-gray-700 hover:text-primary font-medium transition-colors text-sm uppercase tracking-wider">Contact</a>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-btn" class="md:hidden text-gray-800 focus:outline-none p-2">
+                <i data-lucide="menu" id="menu-icon" class="w-7 h-7"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu Overlay -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white/95 backdrop-blur-md absolute top-full left-0 w-full shadow-lg border-t border-gray-100 flex flex-col items-center py-4 space-y-2 z-40">
+            <a href="#home" class="mobile-link text-gray-800 hover:text-primary font-medium text-lg w-full text-center py-3 hover:bg-gray-50 transition-colors">Home</a>
+            <a href="#about" class="mobile-link text-gray-800 hover:text-primary font-medium text-lg w-full text-center py-3 hover:bg-gray-50 transition-colors">About</a>
+            <a href="#skills" class="mobile-link text-gray-800 hover:text-primary font-medium text-lg w-full text-center py-3 hover:bg-gray-50 transition-colors">Skills</a>
+            <a href="#travels" class="mobile-link text-gray-800 hover:text-primary font-medium text-lg w-full text-center py-3 hover:bg-gray-50 transition-colors">Travels</a>
+            <a href="#experience" class="mobile-link text-gray-800 hover:text-primary font-medium text-lg w-full text-center py-3 hover:bg-gray-50 transition-colors">Experience</a>
+            <a href="#contact" class="mobile-link text-gray-800 hover:text-primary font-medium text-lg w-full text-center py-3 hover:bg-gray-50 transition-colors">Contact</a>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="home" class="min-h-screen flex items-center pt-28 pb-16 md:pt-24 md:pb-12 bg-white relative overflow-hidden">
+            <!-- Particle Canvas -->
+            <canvas id="particle-canvas" class="absolute inset-0 z-0 pointer-events-none"></canvas>
+
+            <!-- Static Background Elements -->
+            <div class="absolute inset-0 pointer-events-none">
+                <svg class="absolute -top-20 -right-20 w-[600px] h-[600px] text-gray-50 opacity-70" viewBox="0 0 100 100" fill="currentColor">
+                   <path d="M0 0 L100 0 L100 100 Z" />
+                </svg>
+                <svg class="absolute top-1/4 left-[10%] w-16 h-16 text-primary opacity-20" viewBox="0 0 100 100" style="transform: rotate(15deg);">
+                   <polygon points="50,5 90,90 10,90" fill="none" stroke="currentColor" stroke-width="4" />
+                </svg>
+            </div>
+
+            <div class="container mx-auto px-4 md:px-6 flex flex-col-reverse md:flex-row items-center justify-between relative z-10">
+                <!-- Left Content -->
+                <div class="w-full md:w-1/2 mt-12 md:mt-0 space-y-4 md:space-y-6 text-center md:text-left">
+                    <div class="reveal-element">
+                        <h2 class="text-xl md:text-2xl font-medium text-gray-600">Hi There,</h2>
+                        <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold text-gray-800 leading-tight">
+                            I'm <span class="text-primary">Niraj Khaniya</span>
+                        </h1>
+                        <div class="text-xl sm:text-2xl md:text-3xl font-semibold text-gray-700 h-8 md:h-10">
+                            i am into <span id="typewriter-text" class="text-primary typing-cursor"></span>
+                        </div>
+                        
+                        <div class="pt-8">
+                            <a href="#about" class="inline-flex items-center px-6 py-3 md:px-8 md:py-3 bg-primary text-white font-semibold rounded-full shadow-lg hover:bg-orange-600 transition-transform transform hover:-translate-y-1 text-sm md:text-base">
+                                About Me <i data-lucide="arrow-right" class="ml-2 w-5 h-5"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Content - Image -->
+                <div class="w-full md:w-1/2 flex justify-center md:justify-end relative">
+                    <div class="reveal-element" style="transition-delay: 200ms;">
+                        <div class="relative w-56 h-56 sm:w-64 sm:h-64 md:w-[500px] md:h-[500px] rounded-full overflow-hidden border-4 md:border-8 border-gray-100 shadow-xl z-20">
+                            <img 
+                                src="https://images.unsplash.com/photo-1600486913747-55e5470d6f40?q=80&w=1000&auto=format&fit=crop" 
+                                alt="Niraj Khaniya" 
+                                class="w-full h-full object-cover"
+                            />
+                        </div>
+                        <!-- Decorative element behind image -->
+                        <div class="absolute top-10 right-10 w-full h-full rounded-full border-2 border-primary/20 -z-10 scale-105 hidden md:block"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="py-16 md:py-24 bg-gray-50">
+            <div class="container mx-auto px-4 md:px-6">
+                <div class="reveal-element text-center mb-12 md:mb-16">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800 relative inline-block after:content-[''] after:block after:w-20 after:h-1 after:bg-primary after:mx-auto after:mt-2">
+                        About Me
+                    </h2>
+                </div>
+
+                <div class="flex flex-col md:flex-row items-center gap-12">
+                    <!-- Left - Image -->
+                    <div class="w-full md:w-1/3 flex justify-center">
+                        <div class="reveal-element w-full flex justify-center">
+                            <div class="relative w-full max-w-[300px] aspect-[4/5] md:w-full md:h-[450px] md:max-w-none md:aspect-auto rounded-2xl overflow-hidden shadow-2xl md:transform md:rotate-3 md:hover:rotate-0 transition-all duration-500">
+                                <img 
+                                    src="https://images.unsplash.com/photo-1600486913747-55e5470d6f40?q=80&w=1000&auto=format&fit=crop" 
+                                    alt="Profile" 
+                                    class="w-full h-full object-cover"
+                                />
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right - Content -->
+                    <div class="w-full md:w-2/3 space-y-6">
+                        <div class="reveal-element" style="transition-delay: 200ms;">
+                            <h3 class="text-2xl md:text-3xl font-bold text-gray-800 text-center md:text-left">
+                                I'm Niraj
+                            </h3>
+                            <h4 class="text-xl text-primary font-medium font-serif text-center md:text-left">
+                                निरज भन्छन मलाई
+                            </h4>
+                            
+                            <p class="text-gray-600 leading-relaxed text-lg text-left md:text-left">
+                                An accountant who loves trekking, photography, and exploring Android app development whenever inspiration strikes. Often found chasing trails or capturing moments through the camera lens, sharing life beyond the 9-to-5.
+                            </p>
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-4">
+                                <div class="space-y-2">
+                                    <p class="text-gray-700 font-medium flex items-center justify-start md:justify-start"><span class="text-primary font-bold w-24 shrink-0 inline-block">age :</span> खोइ कति पो हो</p>
+                                    <p class="text-gray-700 font-medium flex items-center justify-start md:justify-start"><span class="text-primary font-bold w-24 shrink-0 inline-block">phone :</span> +977 9843298530</p>
+                                    <p class="text-gray-700 font-medium flex items-center justify-start md:justify-start"><span class="text-primary font-bold w-24 shrink-0 inline-block">email :</span> [email protected]</p>
+                                </div>
+                                <div class="space-y-2">
+                                    <p class="text-gray-700 font-medium flex items-center justify-start md:justify-start"><span class="text-primary font-bold w-24 shrink-0 inline-block">place :</span> Kathmandu Nepal</p>
+                                    <p class="text-gray-700 font-medium flex items-center justify-start md:justify-start"><span class="text-primary font-bold w-24 shrink-0 inline-block">C. place :</span> Bharatpur Chitwan Nepal</p>
+                                </div>
+                            </div>
+
+                            <div class="pt-6 text-center md:text-left">
+                                <button class="px-8 py-3 bg-gray-800 text-white font-semibold rounded-lg shadow-lg hover:bg-primary transition-colors">
+                                    थप जानकारी
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" class="py-16 md:py-24 bg-white">
+            <div class="container mx-auto px-4 md:px-6">
+                <div class="reveal-element text-center mb-12 md:mb-16">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800 relative inline-block after:content-[''] after:block after:w-20 after:h-1 after:bg-primary after:mx-auto after:mt-2">
+                        Skills & Abilities
+                    </h2>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Excel -->
+                    <div class="reveal-element h-full">
+                        <div class="bg-white p-6 md:p-8 rounded-xl shadow-lg border-2 border-transparent hover:border-2 transition-all duration-300 group transform hover:-translate-y-2 flex flex-col items-center h-full group-hover:border-green-500 group-hover:shadow-green-100">
+                            <div class="w-24 h-24 mb-6 p-4 bg-gray-50 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-inner">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/3/34/Microsoft_Office_Excel_%282019%E2%80%93present%29.svg" alt="Excel" class="w-full h-full object-contain" />
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-800 mb-3">Excel</h3>
+                            <p class="text-gray-600 text-sm text-center">Data Analysis, Pivots, Advanced Formulas</p>
+                        </div>
+                    </div>
+                    
+                    <!-- PowerPoint -->
+                    <div class="reveal-element h-full" style="transition-delay: 100ms;">
+                        <div class="bg-white p-6 md:p-8 rounded-xl shadow-lg border-2 border-transparent hover:border-2 transition-all duration-300 group transform hover:-translate-y-2 flex flex-col items-center h-full group-hover:border-orange-500 group-hover:shadow-orange-100">
+                            <div class="w-24 h-24 mb-6 p-4 bg-gray-50 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-inner">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/0/0d/Microsoft_Office_PowerPoint_%282019%E2%80%93present%29.svg" alt="PowerPoint" class="w-full h-full object-contain" />
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-800 mb-3">PowerPoint</h3>
+                            <p class="text-gray-600 text-sm text-center">Professional Presentations, Visual Design</p>
+                        </div>
+                    </div>
+
+                    <!-- Word -->
+                    <div class="reveal-element h-full" style="transition-delay: 200ms;">
+                        <div class="bg-white p-6 md:p-8 rounded-xl shadow-lg border-2 border-transparent hover:border-2 transition-all duration-300 group transform hover:-translate-y-2 flex flex-col items-center h-full group-hover:border-blue-500 group-hover:shadow-blue-100">
+                            <div class="w-24 h-24 mb-6 p-4 bg-gray-50 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-inner">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/f/fd/Microsoft_Office_Word_%282019%E2%80%93present%29.svg" alt="MS Word" class="w-full h-full object-contain" />
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-800 mb-3">MS Word</h3>
+                            <p class="text-gray-600 text-sm text-center">Documentation, Reports, Formatting</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Travels Section -->
+        <section id="travels" class="py-16 md:py-24 bg-gray-50 relative overflow-hidden">
+            <!-- Reuse Particle Logic -->
+            <canvas id="travels-canvas" class="absolute inset-0 z-0 pointer-events-none"></canvas>
+
+            <div class="container mx-auto px-4 md:px-6 relative z-10">
+                <div class="reveal-element text-center mb-10 md:mb-16">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800 relative inline-block after:content-[''] after:block after:w-20 after:h-1 after:bg-primary after:mx-auto after:mt-2">
+                        My Travels
+                    </h2>
+                    <p class="mt-6 text-gray-600 italic max-w-2xl mx-auto text-lg">
+                        "Embark on a journey where every step writes a new chapter in the story of your life."
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Item 1 -->
+                    <div class="reveal-element">
+                        <div class="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 group">
+                            <div class="h-56 md:h-48 overflow-hidden relative">
+                                <img src="https://picsum.photos/600/400?random=10" alt="Janakpurdham" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500" />
+                                <div class="absolute top-4 right-4 bg-white/90 px-3 py-1 rounded-full text-xs font-bold text-primary flex items-center shadow-sm">
+                                    <i data-lucide="calendar" class="w-3 h-3 mr-1"></i> 2023 | June
+                                </div>
+                            </div>
+                            <div class="p-6">
+                                <h3 class="text-xl font-bold text-gray-800 mb-2">Janakpurdham</h3>
+                                <div class="flex items-center text-gray-500 text-sm">
+                                    <i data-lucide="map-pin" class="w-4 h-4 mr-1 text-primary"></i>
+                                    Janakpur | Ramjanaki Mandir
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Item 2 -->
+                    <div class="reveal-element" style="transition-delay: 100ms;">
+                        <div class="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 group">
+                            <div class="h-56 md:h-48 overflow-hidden relative">
+                                <img src="https://picsum.photos/600/400?random=11" alt="RARA" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500" />
+                                <div class="absolute top-4 right-4 bg-white/90 px-3 py-1 rounded-full text-xs font-bold text-primary flex items-center shadow-sm">
+                                    <i data-lucide="calendar" class="w-3 h-3 mr-1"></i> 2023 | August
+                                </div>
+                            </div>
+                            <div class="p-6">
+                                <h3 class="text-xl font-bold text-gray-800 mb-2">RARA</h3>
+                                <div class="flex items-center text-gray-500 text-sm">
+                                    <i data-lucide="map-pin" class="w-4 h-4 mr-1 text-primary"></i>
+                                    Mugu | Thakurnath
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Item 3 -->
+                    <div class="reveal-element" style="transition-delay: 200ms;">
+                        <div class="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 group">
+                            <div class="h-56 md:h-48 overflow-hidden relative">
+                                <img src="https://picsum.photos/600/400?random=12" alt="Tilicho | Manang" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500" />
+                                <div class="absolute top-4 right-4 bg-white/90 px-3 py-1 rounded-full text-xs font-bold text-primary flex items-center shadow-sm">
+                                    <i data-lucide="calendar" class="w-3 h-3 mr-1"></i> 2023 | June
+                                </div>
+                            </div>
+                            <div class="p-6">
+                                <h3 class="text-xl font-bold text-gray-800 mb-2">Tilicho | Manang</h3>
+                                <div class="flex items-center text-gray-500 text-sm">
+                                    <i data-lucide="map-pin" class="w-4 h-4 mr-1 text-primary"></i>
+                                    Manang | Tilicho Base Camp
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience Section -->
+        <section id="experience" class="py-16 md:py-24 bg-gray-50">
+            <div class="container mx-auto px-4 md:px-6">
+                <div class="reveal-element text-center mb-12 md:mb-16">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800 relative inline-block after:content-[''] after:block after:w-20 after:h-1 after:bg-primary after:mx-auto after:mt-2">
+                        Experience
+                    </h2>
+                </div>
+
+                <div class="max-w-4xl mx-auto relative">
+                    <!-- Vertical Line -->
+                    <div class="absolute left-8 md:left-1/2 h-full w-0.5 bg-gray-200 transform -translate-x-1/2 md:-translate-x-1/2"></div>
+
+                    <div class="space-y-12">
+                        <!-- Experience Item 1 -->
+                        <div class="reveal-element">
+                            <div class="relative flex flex-col md:flex-row items-center md:flex-row-reverse">
+                                <!-- Timeline Dot -->
+                                <div class="absolute left-8 md:left-1/2 w-4 h-4 rounded-full bg-primary border-4 border-white shadow-md transform -translate-x-1/2 md:-translate-x-1/2 z-10"></div>
+                                
+                                <!-- Content Card -->
+                                <div class="w-[calc(100%-4rem)] md:w-5/12 ml-16 md:ml-0 p-5 md:p-6 bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow border-l-4 border-primary">
+                                    <span class="inline-block px-3 py-1 mb-2 text-xs font-semibold text-primary bg-orange-50 rounded-full">
+                                        Jan 2022 - Present
+                                    </span>
+                                    <h3 class="text-lg font-bold text-gray-800">S.A.R. Associates</h3>
+                                    <div class="flex items-center mt-1 text-gray-600">
+                                        <i data-lucide="briefcase" class="w-4 h-4 mr-2"></i>
+                                        <span class="text-sm font-medium">Discount Auditor (Coca‑Cola Terai)</span>
+                                    </div>
+                                </div>
+                                
+                                <!-- Spacer for other side -->
+                                <div class="hidden md:block w-5/12"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-center mt-16">
+                         <div class="reveal-element" style="transition-delay: 200ms;">
+                           <button class="px-8 py-3 bg-primary text-white font-semibold rounded-full shadow-lg hover:bg-orange-600 transition-colors">
+                             View All
+                           </button>
+                         </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-16 md:py-24 bg-white">
+            <div class="container mx-auto px-4 md:px-6">
+                <div class="reveal-element text-center mb-12 md:mb-16">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800 relative inline-block after:content-[''] after:block after:w-20 after:h-1 after:bg-primary after:mx-auto after:mt-2">
+                        Get in Touch
+                    </h2>
+                </div>
+
+                <div class="flex flex-col lg:flex-row gap-8 md:gap-12 max-w-6xl mx-auto">
+                    <!-- Contact Info -->
+                    <div class="w-full lg:w-1/3">
+                        <div class="reveal-element h-full">
+                            <div class="bg-primary rounded-2xl p-6 md:p-8 text-white flex flex-col justify-between relative overflow-hidden shadow-2xl h-full">
+                                <div class="relative z-10">
+                                    <h3 class="text-2xl font-bold mb-6">Contact Information</h3>
+                                    <div class="space-y-6">
+                                        <div class="flex items-start">
+                                            <i data-lucide="phone" class="w-5 h-5 mr-4 mt-1 flex-shrink-0"></i>
+                                            <div>
+                                                <p class="font-semibold text-orange-100 text-sm uppercase">Phone</p>
+                                                <p class="text-lg">+977 9843-298530</p>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-start">
+                                            <i data-lucide="mail" class="w-5 h-5 mr-4 mt-1 flex-shrink-0"></i>
+                                            <div>
+                                                <p class="font-semibold text-orange-100 text-sm uppercase">Email</p>
+                                                <p class="text-lg break-all">[email protected]</p>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-start">
+                                            <i data-lucide="map-pin" class="w-5 h-5 mr-4 mt-1 flex-shrink-0"></i>
+                                            <div>
+                                                <p class="font-semibold text-orange-100 text-sm uppercase">Address</p>
+                                                <p class="text-lg">Kathmandu, Nepal</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="absolute -bottom-10 -right-10 w-40 h-40 bg-white opacity-10 rounded-full"></div>
+                                <div class="absolute top-10 -right-10 w-20 h-20 bg-white opacity-10 rounded-full"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Contact Form -->
+                    <div class="w-full lg:w-2/3">
+                        <div class="reveal-element" style="transition-delay: 200ms;">
+                            <div class="bg-white p-6 md:p-10 rounded-2xl shadow-xl border border-gray-100">
+                                <h3 class="text-2xl font-bold text-gray-800 mb-6">Send me a message</h3>
+                                
+                                <form id="contact-form" class="space-y-6">
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                        <div>
+                                            <label class="block text-sm font-medium text-gray-700 mb-2">Name</label>
+                                            <input type="text" name="name" placeholder="John Doe" required class="w-full px-4 py-3 rounded-lg bg-gray-50 border border-gray-200 focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all" />
+                                        </div>
+                                        <div>
+                                            <label class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+                                            <input type="email" name="email" placeholder="john@example.com" required class="w-full px-4 py-3 rounded-lg bg-gray-50 border border-gray-200 focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all" />
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Message</label>
+                                        <textarea name="message" rows="4" placeholder="Write your message here..." required class="w-full px-4 py-3 rounded-lg bg-gray-50 border border-gray-200 focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all"></textarea>
+                                    </div>
+                                    <button type="submit" id="submit-btn" class="w-full md:w-auto inline-flex justify-center items-center px-8 py-3 bg-primary text-white font-semibold rounded-lg shadow-lg hover:bg-orange-600 transition-colors">
+                                        <i data-lucide="send" class="w-4 h-4 mr-2"></i> Send Message
+                                    </button>
+                                </form>
+                                <div id="success-msg" class="hidden bg-green-50 text-green-800 p-6 rounded-lg flex flex-col items-center justify-center text-center space-y-2 animate-fade-in">
+                                    <i data-lucide="check-circle" class="w-12 h-12 text-green-500 mb-2"></i>
+                                    <h4 class="text-xl font-bold">Message Sent!</h4>
+                                    <p>Thank you for reaching out. I'll get back to you as soon as possible.</p>
+                                    <button id="reset-btn" class="mt-4 px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors text-sm font-medium">Send Another Message</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-300 py-12 md:py-16">
+        <div class="container mx-auto px-4 md:px-6">
+            <div class="reveal-element">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 mb-12 text-center md:text-left">
+                    <!-- About Column -->
+                    <div class="space-y-4 flex flex-col items-center md:items-start">
+                        <h3 class="text-2xl font-bold text-white mb-4">Niraj's Portfolio</h3>
+                        <p class="text-sm leading-relaxed text-gray-400">
+                            Thank you for visiting my personal portfolio website. Connect with me over socials.
+                            <br />
+                            Keep Rising . Connect with me over live chat!
+                        </p>
+                        <div class="flex space-x-4 pt-2 justify-center md:justify-start">
+                            <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary hover:text-white transition-all"><i data-lucide="facebook" class="w-4 h-4"></i></a>
+                            <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary hover:text-white transition-all"><i data-lucide="instagram" class="w-4 h-4"></i></a>
+                            <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary hover:text-white transition-all"><i data-lucide="linkedin" class="w-4 h-4"></i></a>
+                            <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary hover:text-white transition-all"><i data-lucide="twitter" class="w-4 h-4"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- Links Column -->
+                    <div>
+                        <h3 class="text-xl font-bold text-white mb-6">Quick Links</h3>
+                        <ul class="space-y-2">
+                            <li><a href="#home" class="hover:text-primary transition-colors">Home</a></li>
+                            <li><a href="#about" class="hover:text-primary transition-colors">About</a></li>
+                            <li><a href="#skills" class="hover:text-primary transition-colors">Skills</a></li>
+                            <li><a href="#travels" class="hover:text-primary transition-colors">Travels</a></li>
+                            <li><a href="#experience" class="hover:text-primary transition-colors">Experience</a></li>
+                            <li><a href="#contact" class="hover:text-primary transition-colors">Contact</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Contact Column -->
+                    <div>
+                        <h3 class="text-xl font-bold text-white mb-6">Contact info</h3>
+                        <div class="space-y-4 text-sm text-gray-400">
+                            <p class="text-lg text-white font-semibold">+977 9843-298530</p>
+                            <p>[email protected]</p>
+                            <p>Nuwakot, Bagmati Nepal</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="border-t border-gray-800 pt-8 text-center text-sm">
+                    <p class="flex items-center justify-center">
+                        Designed with <i data-lucide="heart" class="w-4 h-4 mx-1 text-red-500 fill-current"></i> by Niraj Khaniya
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Main JavaScript Logic -->
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // 1. Mobile Menu Logic
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuIcon = document.getElementById('menu-icon');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+        let isMenuOpen = false;
+
+        mobileMenuBtn.addEventListener('click', () => {
+            isMenuOpen = !isMenuOpen;
+            if (isMenuOpen) {
+                mobileMenu.classList.remove('hidden');
+                menuIcon.setAttribute('data-lucide', 'x');
+            } else {
+                mobileMenu.classList.add('hidden');
+                menuIcon.setAttribute('data-lucide', 'menu');
+            }
+            lucide.createIcons(); // Re-render icon
+        });
+
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                isMenuOpen = false;
+                mobileMenu.classList.add('hidden');
+                menuIcon.setAttribute('data-lucide', 'menu');
+                lucide.createIcons();
+            });
+        });
+
+        // 2. Navbar Scroll Logic
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.remove('bg-transparent', 'py-6');
+                navbar.classList.add('bg-white', 'shadow-md', 'py-4');
+            } else {
+                navbar.classList.add('bg-transparent', 'py-6');
+                navbar.classList.remove('bg-white', 'shadow-md', 'py-4');
+            }
+        });
+
+        // 3. Typewriter Effect
+        const textElement = document.getElementById('typewriter-text');
+        const words = ["Accounting", "Photography", "Trekking", "Coding"];
+        let textIndex = 0;
+        let currentWord = "";
+        let isDeleting = false;
+
+        function typeWriter() {
+            const fullWord = words[textIndex % words.length];
+            
+            if (isDeleting) {
+                currentWord = fullWord.substring(0, currentWord.length - 1);
+            } else {
+                currentWord = fullWord.substring(0, currentWord.length + 1);
+            }
+
+            textElement.textContent = currentWord;
+
+            let typeSpeed = isDeleting ? 50 : 150;
+
+            if (!isDeleting && currentWord === fullWord) {
+                typeSpeed = 1500; // Pause at end of word
+                isDeleting = true;
+            } else if (isDeleting && currentWord === "") {
+                isDeleting = false;
+                textIndex++;
+                typeSpeed = 500; // Pause before new word
+            }
+
+            setTimeout(typeWriter, typeSpeed);
+        }
+        typeWriter();
+
+        // 4. Reveal on Scroll (Intersection Observer)
+        const revealElements = document.querySelectorAll('.reveal-element');
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: "0px 0px -50px 0px"
+        };
+
+        const observer = new IntersectionObserver((entries, obs) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('reveal-visible');
+                    obs.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        revealElements.forEach(el => observer.observe(el));
+
+        // 5. Contact Form Handler (Mock)
+        const contactForm = document.getElementById('contact-form');
+        const successMsg = document.getElementById('success-msg');
+        const submitBtn = document.getElementById('submit-btn');
+        const resetBtn = document.getElementById('reset-btn');
+
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Mock submitting state
+            const originalBtnContent = submitBtn.innerHTML;
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i data-lucide="loader-2" class="w-4 h-4 mr-2 animate-spin"></i> Sending...';
+            lucide.createIcons();
+
+            setTimeout(() => {
+                contactForm.style.display = 'none';
+                successMsg.classList.remove('hidden');
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalBtnContent;
+                contactForm.reset();
+            }, 1500);
+        });
+
+        resetBtn.addEventListener('click', () => {
+            successMsg.classList.add('hidden');
+            contactForm.style.display = 'block';
+        });
+
+        // 6. Particle Network (Multiple Instances)
+        
+        function createParticleNetwork(canvasId) {
+            const canvas = document.getElementById(canvasId);
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            if (!ctx) return;
+            
+            let particles = [];
+            let mouse = { x: -1000, y: -1000 };
+            const particleColor = '255, 122, 53'; // #FF7A35
+
+            class Particle {
+                constructor(w, h) {
+                    this.x = Math.random() * w;
+                    this.y = Math.random() * h;
+                    this.vx = (Math.random() - 0.5) * 1;
+                    this.vy = (Math.random() - 0.5) * 1;
+                    this.size = Math.random() * 2.5 + 1.5;
+                }
+                update(w, h) {
+                    this.x += this.vx;
+                    this.y += this.vy;
+                    if (this.x < 0 || this.x > w) this.vx *= -1;
+                    if (this.y < 0 || this.y > h) this.vy *= -1;
+                }
+                draw() {
+                    ctx.fillStyle = `rgba(${particleColor}, ${this.size > 3 ? 0.6 : 0.4})`;
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+            }
+
+            function initParticles() {
+                particles = [];
+                const w = canvas.width;
+                const h = canvas.height;
+                const density = Math.floor((w * h) / 12000);
+                const count = Math.min(Math.max(density, 40), 120);
+                for (let i = 0; i < count; i++) {
+                    particles.push(new Particle(w, h));
+                }
+            }
+
+            function resizeCanvas() {
+                if(!canvas.parentElement) return;
+                canvas.width = canvas.parentElement.clientWidth;
+                canvas.height = canvas.parentElement.clientHeight;
+                initParticles();
+            }
+
+            function animate() {
+                const w = canvas.width;
+                const h = canvas.height;
+                ctx.clearRect(0, 0, w, h);
+
+                for (let i = 0; i < particles.length; i++) {
+                    const p = particles[i];
+                    p.update(w, h);
+                    p.draw();
+
+                    // Connections
+                    for (let j = i + 1; j < particles.length; j++) {
+                        const p2 = particles[j];
+                        const dist = Math.hypot(p.x - p2.x, p.y - p2.y);
+                        if (dist < 140) {
+                            ctx.beginPath();
+                            ctx.strokeStyle = `rgba(${particleColor}, ${0.3 * (1 - dist / 140)})`;
+                            ctx.lineWidth = 0.8;
+                            ctx.moveTo(p.x, p.y);
+                            ctx.lineTo(p2.x, p2.y);
+                            ctx.stroke();
+                        }
+                    }
+
+                    // Mouse Interaction
+                    const distMouse = Math.hypot(p.x - mouse.x, p.y - mouse.y);
+                    if (distMouse < 180) {
+                        ctx.beginPath();
+                        ctx.strokeStyle = `rgba(${particleColor}, ${0.5 * (1 - distMouse / 180)})`;
+                        ctx.lineWidth = 1;
+                        ctx.moveTo(p.x, p.y);
+                        ctx.lineTo(mouse.x, mouse.y);
+                        ctx.stroke();
+                        p.vx += (mouse.x - p.x) * 0.0001;
+                        p.vy += (mouse.y - p.y) * 0.0001;
+                    }
+                }
+                requestAnimationFrame(animate);
+            }
+
+            // Global mouse tracking scoped to this canvas
+            window.addEventListener('mousemove', (e) => {
+                const rect = canvas.getBoundingClientRect();
+                // Check if mouse is near or inside this canvas
+                if (e.clientX >= rect.left - 100 && e.clientX <= rect.right + 100 && e.clientY >= rect.top - 100 && e.clientY <= rect.bottom + 100) {
+                    mouse.x = e.clientX - rect.left;
+                    mouse.y = e.clientY - rect.top;
+                } else {
+                    mouse.x = -1000;
+                    mouse.y = -1000;
+                }
+            });
+
+            window.addEventListener('resize', resizeCanvas);
+            resizeCanvas();
+            animate();
+        }
+
+        // Initialize particles for both sections
+        createParticleNetwork('particle-canvas'); // Hero Section
+        createParticleNetwork('travels-canvas');  // Travels Section
+
+    </script>
+<script type="module" src="/index.tsx"></script>
+</body>
+</html>
