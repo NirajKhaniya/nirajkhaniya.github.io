@@ -56,6 +56,7 @@
       }
       body {
         overflow-x: hidden;
+        -webkit-tap-highlight-color: transparent;
       }
       
       /* Typing Cursor - Refined */
@@ -89,8 +90,9 @@
 {
   "imports": {
     "react": "https://esm.sh/react@^19.2.3",
-    "lucide-react": "https://esm.sh/lucide-react@^0.561.0",
-    "react/": "https://esm.sh/react@^19.2.3/"
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "lucide-react": "https://esm.sh/lucide-react@^0.561.0"
   }
 }
 </script>
@@ -100,7 +102,7 @@
     <!-- Navbar -->
     <nav id="navbar" class="fixed top-0 w-full z-50 transition-all duration-300 bg-transparent py-6">
         <div class="container mx-auto px-4 md:px-6 flex justify-between items-center">
-            <a href="#home" class="text-2xl font-bold text-gray-800 tracking-wide">
+            <a href="#home" class="text-2xl font-bold text-gray-800 tracking-wide z-50">
                 Niraj<span class="text-primary">Khaniya</span>
             </a>
 
@@ -115,19 +117,19 @@
             </div>
 
             <!-- Mobile Menu Button -->
-            <button id="mobile-menu-btn" class="md:hidden text-gray-800 focus:outline-none p-2">
+            <button id="mobile-menu-btn" class="md:hidden text-gray-800 focus:outline-none p-2 z-50" aria-label="Toggle Menu">
                 <i data-lucide="menu" id="menu-icon" class="w-7 h-7"></i>
             </button>
         </div>
 
         <!-- Mobile Menu Overlay -->
-        <div id="mobile-menu" class="hidden md:hidden bg-white/95 backdrop-blur-md absolute top-full left-0 w-full shadow-lg border-t border-gray-100 flex flex-col items-center py-4 space-y-2 z-40">
-            <a href="#home" class="mobile-link text-gray-800 hover:text-primary font-medium text-lg w-full text-center py-3 hover:bg-gray-50 transition-colors">Home</a>
-            <a href="#about" class="mobile-link text-gray-800 hover:text-primary font-medium text-lg w-full text-center py-3 hover:bg-gray-50 transition-colors">About</a>
-            <a href="#skills" class="mobile-link text-gray-800 hover:text-primary font-medium text-lg w-full text-center py-3 hover:bg-gray-50 transition-colors">Skills</a>
-            <a href="#travels" class="mobile-link text-gray-800 hover:text-primary font-medium text-lg w-full text-center py-3 hover:bg-gray-50 transition-colors">Travels</a>
-            <a href="#experience" class="mobile-link text-gray-800 hover:text-primary font-medium text-lg w-full text-center py-3 hover:bg-gray-50 transition-colors">Experience</a>
-            <a href="#contact" class="mobile-link text-gray-800 hover:text-primary font-medium text-lg w-full text-center py-3 hover:bg-gray-50 transition-colors">Contact</a>
+        <div id="mobile-menu" class="hidden md:hidden bg-white/95 backdrop-blur-md fixed inset-0 z-40 flex flex-col items-center justify-center space-y-6 transition-all duration-300 opacity-0 transform translate-y-[-20px]">
+            <a href="#home" class="mobile-link text-2xl text-gray-800 hover:text-primary font-medium w-full text-center py-2 hover:bg-gray-50 transition-colors">Home</a>
+            <a href="#about" class="mobile-link text-2xl text-gray-800 hover:text-primary font-medium w-full text-center py-2 hover:bg-gray-50 transition-colors">About</a>
+            <a href="#skills" class="mobile-link text-2xl text-gray-800 hover:text-primary font-medium w-full text-center py-2 hover:bg-gray-50 transition-colors">Skills</a>
+            <a href="#travels" class="mobile-link text-2xl text-gray-800 hover:text-primary font-medium w-full text-center py-2 hover:bg-gray-50 transition-colors">Travels</a>
+            <a href="#experience" class="mobile-link text-2xl text-gray-800 hover:text-primary font-medium w-full text-center py-2 hover:bg-gray-50 transition-colors">Experience</a>
+            <a href="#contact" class="mobile-link text-2xl text-gray-800 hover:text-primary font-medium w-full text-center py-2 hover:bg-gray-50 transition-colors">Contact</a>
         </div>
     </nav>
 
@@ -139,10 +141,10 @@
 
             <!-- Static Background Elements -->
             <div class="absolute inset-0 pointer-events-none">
-                <svg class="absolute -top-20 -right-20 w-[600px] h-[600px] text-gray-50 opacity-70" viewBox="0 0 100 100" fill="currentColor">
+                <svg class="absolute -top-20 -right-20 w-[300px] h-[300px] md:w-[600px] md:h-[600px] text-gray-50 opacity-70" viewBox="0 0 100 100" fill="currentColor">
                    <path d="M0 0 L100 0 L100 100 Z" />
                 </svg>
-                <svg class="absolute top-1/4 left-[10%] w-16 h-16 text-primary opacity-20" viewBox="0 0 100 100" style="transform: rotate(15deg);">
+                <svg class="absolute top-1/4 left-[10%] w-10 h-10 md:w-16 md:h-16 text-primary opacity-20" viewBox="0 0 100 100" style="transform: rotate(15deg);">
                    <polygon points="50,5 90,90 10,90" fill="none" stroke="currentColor" stroke-width="4" />
                 </svg>
             </div>
@@ -170,7 +172,7 @@
                 <!-- Right Content - Image -->
                 <div class="w-full md:w-1/2 flex justify-center md:justify-end relative">
                     <div class="reveal-element" style="transition-delay: 200ms;">
-                        <div class="relative w-56 h-56 sm:w-80 sm:h-80 md:w-96 md:h-96 lg:w-[500px] lg:h-[500px] rounded-full overflow-hidden border-4 md:border-8 border-gray-100 shadow-xl z-20">
+                        <div class="relative w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 lg:w-[500px] lg:h-[500px] rounded-full overflow-hidden border-4 md:border-8 border-gray-100 shadow-xl z-20 mx-auto md:mx-0">
                             <img 
                                 src="Assets/image.n.jpg" 
                                 alt="Niraj Khaniya" 
@@ -199,7 +201,7 @@
                         <div class="reveal-element w-full flex justify-center">
                             <div class="relative w-full max-w-[300px] aspect-[4/5] md:w-full md:h-[450px] md:max-w-none md:aspect-auto rounded-2xl overflow-hidden shadow-2xl md:transform md:rotate-3 md:hover:rotate-0 transition-all duration-500">
                                 <img 
-                                    src="Assets/image.n.jpg" 
+                                    src="Assets/image.n.jpg"
                                     alt="Profile" 
                                     class="w-full h-full object-cover"
                                 />
@@ -542,13 +544,18 @@
                 </div>
             </div>
 
-            <div class="reveal-element border-t border-gray-800 pt-4 text-center text-xs" style="transition-delay: 300ms;">
+            <div class="border-t border-gray-800 pt-4 text-center text-xs">
                 <p class="flex items-center justify-center">
                     Designed with <i data-lucide="heart" class="w-3 h-3 mx-1 text-red-500 fill-current"></i> by Niraj Khaniya
                 </p>
             </div>
         </div>
     </footer>
+
+    <!-- Scroll To Top Button -->
+    <button id="scroll-to-top" class="fixed bottom-8 right-8 z-50 p-3 bg-primary text-white rounded-full shadow-lg hover:bg-orange-600 transition-all duration-300 transform hover:scale-110 focus:outline-none hidden animate-fade-in" aria-label="Scroll to top">
+        <i data-lucide="arrow-up" class="w-6 h-6"></i>
+    </button>
 
     <!-- Main JavaScript Logic -->
     <script>
@@ -562,24 +569,33 @@
         const mobileLinks = document.querySelectorAll('.mobile-link');
         let isMenuOpen = false;
 
-        mobileMenuBtn.addEventListener('click', () => {
+        function toggleMenu() {
             isMenuOpen = !isMenuOpen;
             if (isMenuOpen) {
                 mobileMenu.classList.remove('hidden');
+                // Small delay to allow display:block to apply before opacity transition
+                setTimeout(() => {
+                    mobileMenu.classList.remove('opacity-0', 'translate-y-[-20px]');
+                }, 10);
                 menuIcon.setAttribute('data-lucide', 'x');
+                document.body.style.overflow = 'hidden'; // Prevent scrolling
             } else {
-                mobileMenu.classList.add('hidden');
+                mobileMenu.classList.add('opacity-0', 'translate-y-[-20px]');
+                // Wait for transition to finish
+                setTimeout(() => {
+                    mobileMenu.classList.add('hidden');
+                }, 300);
                 menuIcon.setAttribute('data-lucide', 'menu');
+                document.body.style.overflow = ''; // Restore scrolling
             }
-            lucide.createIcons(); // Re-render icon
-        });
+            lucide.createIcons();
+        }
+
+        mobileMenuBtn.addEventListener('click', toggleMenu);
 
         mobileLinks.forEach(link => {
             link.addEventListener('click', () => {
-                isMenuOpen = false;
-                mobileMenu.classList.add('hidden');
-                menuIcon.setAttribute('data-lucide', 'menu');
-                lucide.createIcons();
+                if (isMenuOpen) toggleMenu();
             });
         });
 
@@ -611,7 +627,7 @@
                 currentWord = fullWord.substring(0, currentWord.length + 1);
             }
 
-            textElement.textContent = currentWord;
+            if(textElement) textElement.textContent = currentWord;
 
             let typeSpeed = isDeleting ? 50 : 150;
 
@@ -652,30 +668,52 @@
         const submitBtn = document.getElementById('submit-btn');
         const resetBtn = document.getElementById('reset-btn');
 
-        contactForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            
-            // Mock submitting state
-            const originalBtnContent = submitBtn.innerHTML;
-            submitBtn.disabled = true;
-            submitBtn.innerHTML = '<i data-lucide="loader-2" class="w-4 h-4 mr-2 animate-spin"></i> Sending...';
-            lucide.createIcons();
+        if(contactForm) {
+            contactForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                
+                const originalBtnContent = submitBtn.innerHTML;
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = '<i data-lucide="loader-2" class="w-4 h-4 mr-2 animate-spin"></i> Sending...';
+                lucide.createIcons();
 
-            setTimeout(() => {
-                contactForm.style.display = 'none';
-                successMsg.classList.remove('hidden');
-                submitBtn.disabled = false;
-                submitBtn.innerHTML = originalBtnContent;
-                contactForm.reset();
-            }, 1500);
-        });
+                setTimeout(() => {
+                    contactForm.style.display = 'none';
+                    successMsg.classList.remove('hidden');
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = originalBtnContent;
+                    contactForm.reset();
+                }, 1500);
+            });
+        }
 
-        resetBtn.addEventListener('click', () => {
-            successMsg.classList.add('hidden');
-            contactForm.style.display = 'block';
-        });
+        if(resetBtn) {
+            resetBtn.addEventListener('click', () => {
+                successMsg.classList.add('hidden');
+                contactForm.style.display = 'block';
+            });
+        }
 
-        // 6. Particle Network (Multiple Instances)
+        // 6. Scroll To Top Logic
+        const scrollToTopBtn = document.getElementById('scroll-to-top');
+        if (scrollToTopBtn) {
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 300) {
+                    scrollToTopBtn.classList.remove('hidden');
+                } else {
+                    scrollToTopBtn.classList.add('hidden');
+                }
+            });
+
+            scrollToTopBtn.addEventListener('click', () => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        }
+
+        // 7. Particle Network (Optimized)
         
         function createParticleNetwork(canvasId) {
             const canvas = document.getElementById(canvasId);
@@ -686,6 +724,9 @@
             let particles = [];
             let mouse = { x: -1000, y: -1000 };
             const particleColor = '255, 122, 53'; // #FF7A35
+            
+            // Handle High DPI
+            let dpr = window.devicePixelRatio || 1;
 
             class Particle {
                 constructor(w, h) {
@@ -693,8 +734,7 @@
                     this.y = Math.random() * h;
                     this.vx = (Math.random() - 0.5) * 1;
                     this.vy = (Math.random() - 0.5) * 1;
-                    // BOLD CHANGE: Increased size range
-                    this.size = Math.random() * 4 + 2; 
+                    this.size = Math.random() * 3 + 1; // Slightly smaller base size
                 }
                 update(w, h) {
                     this.x += this.vx;
@@ -703,8 +743,7 @@
                     if (this.y < 0 || this.y > h) this.vy *= -1;
                 }
                 draw() {
-                    // BOLD CHANGE: Increased opacity
-                    ctx.fillStyle = `rgba(${particleColor}, ${this.size > 4 ? 0.8 : 0.5})`;
+                    ctx.fillStyle = `rgba(${particleColor}, ${this.size > 3 ? 0.7 : 0.4})`;
                     ctx.beginPath();
                     ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
                     ctx.fill();
@@ -713,11 +752,17 @@
 
             function initParticles() {
                 particles = [];
-                const w = canvas.width;
-                const h = canvas.height;
-                // BOLD CHANGE: Increased density (lower divisor = more particles)
-                const density = Math.floor((w * h) / 9000);
-                const count = Math.min(Math.max(density, 40), 120);
+                // Logical width/height
+                const w = canvas.width / dpr;
+                const h = canvas.height / dpr;
+                
+                // Adjust density for mobile
+                let divisor = 9000;
+                if (window.innerWidth < 768) divisor = 15000; // Less particles on mobile
+                
+                const density = Math.floor((w * h) / divisor);
+                const count = Math.min(Math.max(density, 20), 100);
+                
                 for (let i = 0; i < count; i++) {
                     particles.push(new Particle(w, h));
                 }
@@ -725,14 +770,16 @@
 
             function resizeCanvas() {
                 if(!canvas.parentElement) return;
-                canvas.width = canvas.parentElement.clientWidth;
-                canvas.height = canvas.parentElement.clientHeight;
+                dpr = window.devicePixelRatio || 1;
+                canvas.width = canvas.parentElement.clientWidth * dpr;
+                canvas.height = canvas.parentElement.clientHeight * dpr;
+                ctx.scale(dpr, dpr);
                 initParticles();
             }
 
             function animate() {
-                const w = canvas.width;
-                const h = canvas.height;
+                const w = canvas.width / dpr;
+                const h = canvas.height / dpr;
                 ctx.clearRect(0, 0, w, h);
 
                 for (let i = 0; i < particles.length; i++) {
@@ -744,19 +791,17 @@
                     for (let j = i + 1; j < particles.length; j++) {
                         const p2 = particles[j];
                         const dist = Math.hypot(p.x - p2.x, p.y - p2.y);
-                        // BOLD CHANGE: Increased connection distance slightly
                         if (dist < 150) {
                             ctx.beginPath();
-                            // BOLD CHANGE: Increased opacity and line width
                             ctx.strokeStyle = `rgba(${particleColor}, ${0.5 * (1 - dist / 150)})`;
-                            ctx.lineWidth = 1.2;
+                            ctx.lineWidth = 1;
                             ctx.moveTo(p.x, p.y);
                             ctx.lineTo(p2.x, p2.y);
                             ctx.stroke();
                         }
                     }
 
-                    // Mouse Interaction
+                    // Mouse/Touch Interaction
                     const distMouse = Math.hypot(p.x - mouse.x, p.y - mouse.y);
                     if (distMouse < 180) {
                         ctx.beginPath();
@@ -772,10 +817,9 @@
                 requestAnimationFrame(animate);
             }
 
-            // Global mouse tracking scoped to this canvas
+            // Mouse Move
             window.addEventListener('mousemove', (e) => {
                 const rect = canvas.getBoundingClientRect();
-                // Check if mouse is near or inside this canvas
                 if (e.clientX >= rect.left - 100 && e.clientX <= rect.right + 100 && e.clientY >= rect.top - 100 && e.clientY <= rect.bottom + 100) {
                     mouse.x = e.clientX - rect.left;
                     mouse.y = e.clientY - rect.top;
@@ -785,13 +829,31 @@
                 }
             });
 
+            // Touch Move (Simple single touch)
+            window.addEventListener('touchmove', (e) => {
+                const rect = canvas.getBoundingClientRect();
+                const touch = e.touches[0];
+                if (touch.clientX >= rect.left - 100 && touch.clientX <= rect.right + 100 && touch.clientY >= rect.top - 100 && touch.clientY <= rect.bottom + 100) {
+                    mouse.x = touch.clientX - rect.left;
+                    mouse.y = touch.clientY - rect.top;
+                } else {
+                    mouse.x = -1000;
+                    mouse.y = -1000;
+                }
+            }, { passive: true });
+             
+            window.addEventListener('touchend', () => {
+                 mouse.x = -1000;
+                 mouse.y = -1000;
+            });
+
             window.addEventListener('resize', resizeCanvas);
             resizeCanvas();
             animate();
         }
 
-        // Initialize particles for both sections
-        createParticleNetwork('particle-canvas'); // Hero Section
+        // Initialize particles
+        createParticleNetwork('particle-canvas');
 
     </script>
 </body>
